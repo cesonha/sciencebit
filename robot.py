@@ -1,6 +1,7 @@
 import sys
 import time
 import telepot
+import os
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 from arxivApiClient import *
 from json import JSONDecoder as decoder
@@ -41,6 +42,6 @@ def on_chat_message(msg):
         else :
             bot.sendMessage(chat_id, "Digite /help para saber como posso te ajudar")
 
-bot = telepot.Bot("420962963:AAECydIqoM2CfaTNQsZ1OVyV6WEm94Ql0F0")
+bot = telepot.Bot(os.environ["TELEGRAM_TOKEN"])
 print('Listening ...')
 bot.message_loop({'chat': on_chat_message}, run_forever=True)
