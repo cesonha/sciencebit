@@ -38,6 +38,7 @@ def on_chat_message(msg):
             if queryTerm in translations:
                 queryTerm = translations[queryTerm]
             answer = retrievePaperInfo([queryTerm])
+            bot.sendMessage(chat_id, "Ultimos artigos sobre *" + msg["text"] + "*", parse_mode="Markdown")
             for message in parseJsonToMessages(answer):
                 bot.sendMessage(chat_id, "*" + message["title"] + "* - " + message["published"] + " - " + message["link"], parse_mode="Markdown")
         else :
