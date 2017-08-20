@@ -6,8 +6,7 @@ from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 from arxivApiClient import *
 from json import JSONDecoder as decoder
 # options = ["Machine Learning", "Optimization", "Graph Theory", "Computer Vision", "Bioethanol"]
-ansKeyboard = [[KeyboardButton(text="Machine Learning"), KeyboardButton(text="Optimization")], [KeyboardButton(text="Graph Theory"), KeyboardButton(text="Computer Vision")]
-, [KeyboardButton(text="Smart Cities"), KeyboardButton(text="Bioethanol")]]
+ansKeyboard = [[KeyboardButton(text="Machine Learning"), KeyboardButton(text="Optimization")], [KeyboardButton(text="Graph Theory"), KeyboardButton(text="Computer Vision")], [KeyboardButton(text="Smart Cities"), KeyboardButton(text="Bioethanol")]]
 
 
 def parseJsonToMessages(jsonFile):
@@ -30,9 +29,7 @@ def on_chat_message(msg):
         if msg['text'] == '/news':
             bot.sendMessage(chat_id, 'Escolha uma categoria',
                             reply_markup=ReplyKeyboardMarkup(
-                                keyboard=[
-                                    ansKeyboard
-                                ], resize_keyboard=True
+                                keyboard=ansKeyboard, resize_keyboard=True
                             ))
         elif msg["text"] == "/help":
             bot.sendMessage(chat_id, "/news - para receber ultimos artigos da area desejada")
