@@ -5,7 +5,7 @@ import os
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 from arxivApiClient import *
 from json import JSONDecoder as decoder
-# options = ["Machine Learning", "Optimization", "Graph Theory", "Computer Vision", "Bioethanol"]
+options = ["Machine Learning", "Optimization", "Graph Theory", "Computer Vision", "Bioethanol", "Smart Cities"]
 ansKeyboard = [[KeyboardButton(text="Machine Learning"), KeyboardButton(text="Optimization")], [KeyboardButton(text="Graph Theory"), KeyboardButton(text="Computer Vision")], [KeyboardButton(text="Smart Cities"), KeyboardButton(text="Bioethanol")]]
 
 
