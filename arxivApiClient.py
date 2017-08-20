@@ -8,7 +8,6 @@ from json import JSONEncoder as encoder
 def getPaperList(terms, n):
 	query = terms
 	url = "http://export.arxiv.org/api/query?search_query=abs:\"" + query + "\"&sortBy=lastUpdatedDate&sortOrder=descending&max_results=" + str(n)
-	print(url)
 	data = urllib.urlopen(url).read()
 	return data
 
@@ -20,7 +19,6 @@ def retrievePaperInfo(terms): ## terms has to be a list
 		doc = tree.documentElement
 		entries = doc.getElementsByTagName("entry")
 		jsonEntries = []
-		print(x)
 		for entry in entries:
 			properties = ["title", "id", "published", "summary"]
 			x = [(y, entry.getElementsByTagName(y)[0].firstChild.nodeValue) for y in properties]

@@ -5,8 +5,9 @@ import os
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 from arxivApiClient import *
 from json import JSONDecoder as decoder
-options = ["Machine Learning", "Optimization", "Graph Theory", "Computer Vision", "Bioethanol"]
-ansKeyboard = [KeyboardButton(text=option) for option in options]
+# options = ["Machine Learning", "Optimization", "Graph Theory", "Computer Vision", "Bioethanol"]
+ansKeyboard = [[KeyboardButton(text="Machine Learning"), KeyboardButton(text="Optimization")], [KeyboardButton(text="Graph Theory"), KeyboardButton(text="Computer Vision")]
+, [KeyboardButton(text="Smart Cities"), KeyboardButton(text="Bioethanol")]]
 
 
 def parseJsonToMessages(jsonFile):
@@ -42,6 +43,7 @@ def on_chat_message(msg):
         else :
             bot.sendMessage(chat_id, "Digite /help para saber como posso te ajudar")
 
-bot = telepot.Bot(os.environ["TELEGRAM_TOKEN"])
+token = os.environ["TELEGRAM_TOKEN"]
+bot = telepot.Bot(token)
 print('Listening ...')
 bot.message_loop({'chat': on_chat_message}, run_forever=True)
