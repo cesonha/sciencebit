@@ -5,9 +5,9 @@ import os
 from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
 from arxivApiClient import *
 from json import JSONDecoder as decoder
-options = ["Machine Learning", "Optimization", "Graph Theory", "Computer Vision", "Bioethanol", "Smart Cities"]
-ansKeyboard = [[KeyboardButton(text="Machine Learning"), KeyboardButton(text="Optimization")], [KeyboardButton(text="Graph Theory"), KeyboardButton(text="Computer Vision")], [KeyboardButton(text="Smart Cities"), KeyboardButton(text="Bioethanol")]]
-
+options = ["Machine Learning", "Otimizacao", "Teoria dos Grafos", "Visao Computacional", "Bioetanol", "Smart Cities"]
+translations = {"Otimizacao": "Optimization", "Teoria dos Grafos": "Graph Theory", "Bioetanol" : "Bioethanol", "Visao Computacional": "Computer Vision"}
+ansKeyboard = [[KeyboardButton(text="Machine Learning"), KeyboardButton(text="Otimizacao")], [KeyboardButton(text="Teoria dos Grafos"), KeyboardButton(text="Visao Computacional")], [KeyboardButton(text="Smart Cities"), KeyboardButton(text="Bioetanol")]]
 
 def parseJsonToMessages(jsonFile):
     data = decoder().decode(jsonFile)
@@ -34,7 +34,10 @@ def on_chat_message(msg):
         elif msg["text"] == "/help":
             bot.sendMessage(chat_id, "/news - para receber ultimos artigos da area desejada")
         elif msg["text"] in options:
-            answer = retrievePaperInfo([msg["text"]])
+            queryTerm = msg["text"]
+            if queryTerm in translations:
+                queryTerm = translations[queryTerm]
+            answer = retrievePaperInfo([queryTerm])
             for message in parseJsonToMessages(answer):
                 bot.sendMessage(chat_id, "*" + message["title"] + "* - " + message["published"] + " - " + message["link"], parse_mode="Markdown")
         else :
